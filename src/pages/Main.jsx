@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
-import { AppContext } from '../App';
+import { AppContext } from '../App';  // AppContext'ten verileri alıyoruz
 import './main.css';
 import SideMenu from '../components/SideMenu';
 import Header from './Header';
@@ -15,7 +15,7 @@ import EnableRating from './EnableRating';
 import DisableRating from './DisableRating';
 
 function Main() {
-  const { library, bag, games, setGames } = useContext(AppContext);
+  const { library, bag, games, setGames, users, setUsers } = useContext(AppContext); // users ve setUsers'i burada alıyoruz
   const [active, setActive] = useState(false);
 
   // Refs for sections
@@ -70,7 +70,7 @@ function Main() {
         setGames(data);
       })
       .catch(err => console.error('Fetch error:', err));
-  }, []); // Empty dependency array, fetch only on initial load
+  }, [setGames]); 
 
   return (
     <main>
@@ -86,8 +86,8 @@ function Main() {
               <Bag games={bag} reference={bagRef} />
               <AddGame games={games} reference={addGRef} addGame={(newGame) => setGames(prev => [...prev, newGame])} />
               <RemGame games={games} setGames={setGames} reference={remGRef} />
-              <AddUser users={[]} reference={addURef} />
-              <RemUser users={[]} reference={remURef} />
+              <AddUser users={users} reference={addURef} />
+              <RemUser users={users} setUsers={setUsers} reference={remURef} />
               <EnableRating games={games} setGames={setGames} reference={enaRnCRef} />
               <DisableRating games={games} setGames={setGames} reference={disRnCRef} />
             </>

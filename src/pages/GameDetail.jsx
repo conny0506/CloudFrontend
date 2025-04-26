@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import './gameDetail.css';
-import { useParams } from 'react-router-dom';
 
 function GameDetail() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [game, setGame] = useState(null);
 
   useEffect(() => {
-    fetch('/api/gamesData.json') 
+    fetch('/api/gamesData.json')
       .then(res => res.json())
       .then(data => {
         const foundGame = data.find(game => game._id === parseInt(id));
@@ -24,6 +25,21 @@ function GameDetail() {
 
   return (
     <div className="game-detail-container">
+
+      {/* Sağ üst köşe için Rating ve Comments */}
+      <div className={`rating-comments-container ${game.disableRating ? 'hide' : ''}`}>
+        <h4>Rating: {game.rating} / 5</h4>
+        <h3>All Comments</h3>
+        <ul className="comment-list">
+          {game.users.map((user, index) => (
+            <li key={index}>
+              <strong>{user.name}</strong> ({user.playTime}h, Rating: {user.rating}): {user.comment}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Ana Oyun Kartı */}
       <div className="game-card">
         <img src={game.img} alt={game.title} className="game-image" />
         <div className="game-info">
@@ -42,18 +58,12 @@ function GameDetail() {
           <p><strong>Release Year:</strong> {game.releaseYear}</p>
         </div>
 
-        <div className={`rating-comments-container ${game.disableRating ? 'hide' : ''}`}>
-          <h4>Rating: {game.rating} / 5</h4>
-          <h3>All Comments</h3>
-          <ul className="comment-list">
-            {game.users.map((user, index) => (
-              <li key={index}>
-                <strong>{user.name}</strong> ({user.playTime}h, Rating: {user.rating}): {user.comment}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {/* Geri Butonu */}
+        <button className="back-button" onClick={() => navigate("/")}>
+          <i className="bi bi-arrow-left"></i> Back to Home
+        </button>
       </div>
+
     </div>
   );
 }

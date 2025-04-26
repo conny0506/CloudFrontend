@@ -56,7 +56,7 @@ section::-webkit-scrollbar {
 
 section.active {
     top: 100px;
-    height: auto;
-    overflow-y: visible;
+    height: calc(100vh - 100px);
+    overflow-y: auto;
     opacity: 1;
 }

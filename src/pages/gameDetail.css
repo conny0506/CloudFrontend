@@ -1,91 +1,155 @@
 .game-detail-container {
-    padding: 30px;
-    background: var(--bgColor);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .game-card {
-    background: #1f1f1f;
-    padding: 30px;
-    border-radius: 20px;
-    max-width: 900px;
-    width: 100%;
-    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
-      5px 5px 15px rgba(0, 0, 0, 0.35);
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  
-  .game-image {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-  }
-  
-  .game-info {
-    color: #ffffff;
-  }
-  
-  .game-info .game-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-  }
-  
-  .game-info .game-desc,
-  .game-info .game-price {
-    font-size: 1.2rem;
-  }
-  
-  .game-info .play-button {
-    background: var(--second);
-    padding: 10px 20px;
-    border: none;
-    border-radius: 10px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-  }
-  
-  .game-info .play-button:hover {
-    background: var(--primary);
-  }
-  
-  .info-box {
-    background: #2c2c2c;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  /* Başlıklar için stil */
-  .info-box h3,
-  .rating-comments-container h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #ffffff; /* Beyaz renk ile daha okunabilir */
-    margin-bottom: 15px;
-  }
-  
-  /* Rating ve Yorumlar başlığı */
-  .rating-comments-container h4 {
-    font-size: 1.3rem;
-    font-weight: 600;
-    color: #ffffff; /* Yorum başlıklarını beyaz yapıyoruz */
-  }
-  
-  .comment-list {
-    margin-top: 10px;
-    padding-left: 20px;
-    list-style-type: none;
-  }
-  
-  .comment-list li {
-    font-size: 1rem;
-    color: #ccc;
-    margin-bottom: 10px;
-  }
-  
+  position: relative;
+  display: flex; /* FLEX kullanıyoruz */
+  flex-direction: column; /* Üst üste sıralansın */
+  align-items: center; /* Ortala */
+  justify-content: center; /* Dikeyde de ortala */
+  padding: 30px;
+  background: var(--bgColor);
+  min-height: 100vh;
+}
+
+.game-card {
+  background: #1f1f1f;
+  padding: 30px;
+  border-radius: 20px;
+  max-width: 800px;
+  width: 100%;
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
+              5px 5px 15px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.game-image {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+.game-info {
+  color: #ffffff;
+}
+
+.game-info .game-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.game-info .game-desc,
+.game-info .game-price {
+  font-size: 1.2rem;
+}
+
+.game-info .play-button {
+  background: var(--second);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.game-info .play-button:hover {
+  background: var(--primary);
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--second);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background 0.3s ease;
+  z-index: 1000;  /* Sayfanın üst kısmına alıyoruz */
+}
+
+.back-button:hover {
+  background: var(--primary);
+}
+
+.info-box h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.rating-comments-container {
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 300px;
+  background: #1f1f1f;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.05),
+              5px 5px 15px rgba(0, 0, 0, 0.3);
+  color: #ffffff;
+}
+
+
+.rating-comments-container h4,
+.rating-comments-container h3 {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.rating-comments-container h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+.rating-comments-container h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+.comment-list {
+  list-style: none;
+  padding: 0;
+}
+
+
+.comment-list li {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  background: #2c2c2c;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.comment-list li:hover {
+  background: #3e3e3e;
+  transform: scale(1.05);
+}
+
+.comment-list li strong {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin-right: 8px;
+}
+
