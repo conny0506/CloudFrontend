@@ -1,0 +1,338 @@
+[
+  {
+    "_id": 1,
+    "title": "League of Legends",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Medium",
+    "category": "MOBA",
+    "rating": 4,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/lol.jpeg",
+    "trailer": "https://www.youtube.com/embed/vzHrjOMfHPY",
+    "active": true,
+    "developer": "Riot Games",
+    "releaseYear": 2009,
+    "genres": [
+      "MOBA",
+      "Fantasy",
+      "Multiplayer"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 4,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 5,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 3,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Cross-platform: Yes"
+  },
+  {
+    "_id": 2,
+    "title": "Mario Kart 8 Deluxe",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Easy",
+    "category": "Racing",
+    "rating": 4,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/mario.jpg",
+    "trailer": "https://www.youtube.com/embed/tKlRN2YpxRE",
+    "active": false,
+    "developer": "Nintendo Entertainment Analysis & Development",
+    "releaseYear": 2017,
+    "genres": [
+      "Racing",
+      "Arcade",
+      "Casual"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 4,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 5,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 3,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Single-platform"
+  },
+  {
+    "_id": 3,
+    "title": "Dota II",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Medium",
+    "category": "MOBA",
+    "rating": 2,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/dota.jpg",
+    "trailer": "https://www.youtube.com/embed/-cSFPJwMEq4",
+    "active": false,
+    "developer": "Riot Games",
+    "releaseYear": 2009,
+    "genres": [
+      "Action",
+      "Strategy",
+      "Online"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 2,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 3,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 1,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Cross-platform: Yes"
+  },
+  {
+    "_id": 4,
+    "title": "King of Fighters XV",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Easy",
+    "category": "Fighting",
+    "rating": 4,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/kof.jpg",
+    "trailer": "https://www.youtube.com/embed/_o7Ip64-Sio",
+    "active": false,
+    "developer": "Riot Games",
+    "releaseYear": 2009,
+    "genres": [
+      "Fighting",
+      "Arcade",
+      "PvP"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 4,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 5,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 3,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Single-platform"
+  },
+  {
+    "_id": 5,
+    "title": "God Of War Ragnarok",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Hard",
+    "category": "Action",
+    "rating": 5,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/gow.jpg",
+    "trailer": "https://www.youtube.com/embed/EE-4GvjKcfs",
+    "active": false,
+    "developer": "Riot Games",
+    "releaseYear": 2009,
+    "genres": [
+      "Action",
+      "Story",
+      "Adventure"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 5,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 5,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 5,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Cross-platform: Yes"
+  },
+  {
+    "_id": 6,
+    "title": "Halo Infinite",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Medium",
+    "category": "Shooter",
+    "rating": 2,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/halo.jpeg",
+    "trailer": "https://www.youtube.com/embed/PyMlV5_HRWk",
+    "active": false,
+    "developer": "Riot Games",
+    "releaseYear": 2009,
+    "genres": [
+      "Shooter",
+      "Sci-Fi",
+      "FPS"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 0,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 5,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 1,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Single-platform"
+  },
+  {
+    "_id": 7,
+    "title": "Fortnite",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Easy",
+    "category": "Battle",
+    "rating": 1,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/fortnite.jpg",
+    "trailer": "https://www.youtube.com/embed/7bq0Boq2B3Y",
+    "active": false,
+    "developer": "Riot Games",
+    "releaseYear": 2009,
+    "genres": [
+      "Battle Royale",
+      "Online",
+      "PvP"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 1,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 1,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 1,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Cross-platform: Yes"
+  },
+  {
+    "_id": 8,
+    "title": "Diablo III",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio non nobis, molestiae eum quod qui",
+    "level": "Hard",
+    "category": "RPG",
+    "rating": 4,
+    "discount": 1,
+    "price": 0,
+    "img": "/assets/games/diablo.jpeg",
+    "trailer": "https://www.youtube.com/embed/M2TpNQhfkp4",
+    "active": false,
+    "developer": "Riot Games",
+    "releaseYear": 2009,
+    "genres": [
+      "RPG",
+      "Dark Fantasy",
+      "Hack'n Slash"
+    ],
+    "users": [
+      {
+        "name": "melih",
+        "playTime": 500,
+        "rating": 4,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "name": "ayşe",
+        "playTime": 300,
+        "rating": 5,
+        "comment": "Taktiksel zekaya dayalı, çok iyi."
+      },
+      {
+        "name": "kerem",
+        "playTime": 400,
+        "rating": 3,
+        "comment": "Ortam bazen toxic ama oyun güzel."
+      }
+    ],
+    "playTime": 1200,
+    "optional2": "Single-platform"
+  }
+]

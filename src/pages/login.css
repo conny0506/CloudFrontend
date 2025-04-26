@@ -1,0 +1,67 @@
+/* login.css */
+.login-page {
+  height: 100vh;
+  background: var(--bgColor);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-box {
+  background: #1f1f1f;
+  padding: 40px 30px;
+  border-radius: 20px;
+  text-align: center;
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.05),
+              5px 5px 15px rgba(0, 0, 0, 0.35);
+  max-width: 400px;
+  width: 100%;
+}
+
+.login-box h1 {
+  color: #ffffff;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  letter-spacing: 1px;
+}
+
+.login-box input {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #2c2c2c;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.login-box input::placeholder {
+  color: #aaaaaa;
+}
+
+.login-box button {
+  width: 100%;
+  padding: 12px 15px;
+  background: var(--second);
+  border: none;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.login-box button:hover {
+  background: var(--primary);
+}
+
+/* Hata mesajı stili */
+.error-message {
+  color: #ff4d4d; /* Kırmızı renk */
+  font-size: 1rem;
+  margin-top: 10px;
+}

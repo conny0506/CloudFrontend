@@ -1,0 +1,53 @@
+.addG {
+    padding: 30px;
+    color: #ffffff;
+}
+
+.add-game-form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.form-group input {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background: #2c2c2c;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #aaaaaa;
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 12px 20px;
+    background: var(--second);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.submit-button:hover {
+    background: var(--primary);
+}

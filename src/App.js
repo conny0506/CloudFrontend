@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import React, { useState } from 'react';
 import './App.css';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Main from './pages/Main';
+import GameDetail from './pages/GameDetail';
+import Login from './pages/Login';
+
+export const AppContext = React.createContext();
 
 function App() {
+  const [library, setLibrary] = useState([]);
+  const [bag, setBag] = useState([]);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [games, setGames] = useState([]);
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AppContext.Provider value={{ library, setLibrary, bag, setBag, currentUser, setCurrentUser, games, setGames }}>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/game/:id" element={<GameDetail />} />
+          <Route path="/*" element={<Main />} />
+        </Routes>
+      </Router>
+    </AppContext.Provider>
   );
 }
 

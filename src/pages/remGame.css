@@ -1,0 +1,77 @@
+.game-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 600px;  /* Yüksekliği artırıyoruz */
+    overflow-y: auto;   /* Yalnızca dikey kaydırma */
+    padding-right: 15px;
+    padding-left: 15px;  /* Soldan da padding ekliyoruz */
+    margin-top: 20px;    /* Üst boşluğu artırıyoruz */
+  }
+  
+  .game-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c2c2c;
+    padding: 20px;       /* Daha fazla padding ekliyoruz */
+    border-radius: 10px;
+    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
+                5px 5px 15px rgba(0, 0, 0, 0.35);
+    transition: transform 0.3s ease;
+    color: #fff;
+    width: 100%;         /* Genişlik tam olarak yayılıyor */
+  }
+  
+  .game-item:hover {
+    transform: scale(1.05);
+    background: #3e3e3e; /* Hover durumunda daha açık bir arka plan */
+  }
+  
+  .game-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .game-info img {
+    width: 60px;         /* Görsellerin boyutunu büyütüyoruz */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .remove-btn {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    font-size: 1.2rem;    /* Buton fontunu büyütüyoruz */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  
+  .remove-btn:hover {
+    color: var(--second);
+    transform: scale(1.1);
+  }
+  
+  .remove-btn i {
+    font-size: 1.5rem;   /* Silme ikonunu büyütüyoruz */
+  }
+  
+  /* Scrollbar'ları gizlemek için */
+  .game-list::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .game-list::-webkit-scrollbar-thumb {
+    background: transparent; /* Thumb'ı gizliyoruz */
+  }
+  
+  .game-list::-webkit-scrollbar-track {
+    background: transparent; /* Track'ı da gizliyoruz */
+  }
+  
