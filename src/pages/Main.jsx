@@ -44,12 +44,10 @@ function Main() {
     { name: 'enaRnC', ref: enaRnCRef, active: false }
   ];
 
-  // Toggle side menu active state
   const handelToggleActive = () => {
     setActive(!active);
   };
 
-  // Handle section active state
   const handleSectionActive = (target) => {
     sections.forEach(section => {
       if (section.ref?.current) {
@@ -62,7 +60,6 @@ function Main() {
     });
   };
 
-  // Fetch games data when component mounts
   useEffect(() => {
     fetch('/api/gamesData.json')
       .then(res => res.json())
