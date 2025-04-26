@@ -12,15 +12,29 @@ export const AppContext = React.createContext();
 function App() {
   const [library, setLibrary] = useState([]);
   const [bag, setBag] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
   const [games, setGames] = useState([]);
-  const [users, setUsers] = useState([]); 
+  const [users, setUsers] = useState([]);
+
+  // currentUser'ı localStorage'dan başlatıyoruz
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(localStorage.getItem('currentUser')) || null
+  );
+
+  // currentUser'ı ayarlamak için özel bir fonksiyon
+  const handleSetCurrentUser = (user) => {
+    setCurrentUser(user);
+    if (user) {
+      localStorage.setItem('currentUser', JSON.stringify(user));
+    } else {
+      localStorage.removeItem('currentUser');
+    }
+  };
 
   return (
     <AppContext.Provider value={{ 
       library, setLibrary, 
       bag, setBag, 
-      currentUser, setCurrentUser, 
+      currentUser, setCurrentUser: handleSetCurrentUser, 
       games, setGames, 
       users, setUsers  
     }}>

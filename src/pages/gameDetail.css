@@ -153,3 +153,65 @@
   margin-right: 8px;
 }
 
+.add-comment-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #2c2c2c;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.05),
+               5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.add-comment-form select,
+.add-comment-form textarea,
+.add-comment-form button {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  background: #1f1f1f;
+  color: #ffffff;
+}
+
+.add-comment-form select {
+  background: #2c2c2c;
+}
+
+.add-comment-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.add-comment-form button {
+  background: var(--second);
+  color: #ffffff;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.add-comment-form button:hover {
+  background: var(--primary);
+}
+.stop-button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  background: red;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.stop-button:hover {
+  background: darkred;
+}
