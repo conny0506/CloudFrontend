@@ -7,7 +7,7 @@ function GameDetail() {
   const [game, setGame] = useState(null);
 
   useEffect(() => {
-    fetch('/api/gamesData.json') // Oyunun verilerini çektiğiniz API yolu
+    fetch('/api/gamesData.json') 
       .then(res => res.json())
       .then(data => {
         const foundGame = data.find(game => game._id === parseInt(id));
