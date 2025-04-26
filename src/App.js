@@ -14,10 +14,16 @@ function App() {
   const [bag, setBag] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [games, setGames] = useState([]);
-
+  const [users, setUsers] = useState([]); 
 
   return (
-    <AppContext.Provider value={{ library, setLibrary, bag, setBag, currentUser, setCurrentUser, games, setGames }}>
+    <AppContext.Provider value={{ 
+      library, setLibrary, 
+      bag, setBag, 
+      currentUser, setCurrentUser, 
+      games, setGames, 
+      users, setUsers  
+    }}>
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />

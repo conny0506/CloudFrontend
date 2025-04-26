@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { AppContext } from '../App';
 import './addUser.css';
 
-function AddUser({ users, setUsers, reference }) {
+function AddUser({ reference }) {
+  const { users, setUsers } = useContext(AppContext);  // setUsers'ı burada context'ten alıyoruz
   const [newUser, setNewUser] = useState({
     username: '',
     avatar: ''
@@ -30,7 +32,7 @@ function AddUser({ users, setUsers, reference }) {
       avatar: newUser.avatar
     };
 
-    setUsers([...users, createdUser]);
+    setUsers([...users, createdUser]);  // `setUsers`'ı context'ten alıyoruz
     setNewUser({ username: '', avatar: '' });
 
     setSuccessMessage("User added successfully!");
