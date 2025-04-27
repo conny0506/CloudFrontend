@@ -1,19 +1,67 @@
 [
-    {
-      "username": "melih",
-      "avatar": "/assets/avatars/kratos.jpg"
-    },
-    {
-      "username": "ayse",
-      "avatar": "/assets/avatars/random.jpg"
-    },
-    {
-      "username": "kerem",
-      "avatar": "/assets/avatars/atreus.jpg"
-    },
-    {
-      "username": "admin",
-      "avatar": "/assets/avatars/admin.jpg"
-    }
-  ]
-  
+  {
+    "username": "melih",
+    "avatar": "/assets/avatars/kratos.jpg",
+    "games": [
+      {
+        "gameId": 1,
+        "playTime": 500,
+        "rating": 5,
+        "comment": "Bağımlılık yapıyor!"
+      },
+      {
+        "gameId": 2,
+        "playTime": 400,
+        "rating": 5,
+        "comment": "Harika hikaye!"
+      },
+      {
+        "gameId": 8,
+        "playTime": 300,
+        "rating": 4,
+        "comment": "Karanlık atmosfer çok iyi."
+      }
+    ]
+  },
+  {
+    "username": "ayse",
+    "avatar": "/assets/avatars/random.jpg",
+    "games": [
+      {
+        "gameId": 2,
+        "playTime": 350,
+        "rating": 5,
+        "comment": "Çok eğlenceli bir yarış deneyimi!"
+      },
+      {
+        "gameId": 7,
+        "playTime": 200,
+        "rating": 3,
+        "comment": "Çok fazla rekabet var ama eğlenceli."
+      }
+    ]
+  },
+  {
+    "username": "kerem",
+    "avatar": "/assets/avatars/atreus.jpg",
+    "games": [
+      {
+        "gameId": 3,
+        "playTime": 450,
+        "rating": 4,
+        "comment": "Takım oyunu önemli, sevdim."
+      },
+      {
+        "gameId": 6,
+        "playTime": 150,
+        "rating": 2,
+        "comment": "Çok zor geldi bana."
+      }
+    ]
+  },
+  {
+    "username": "admin",
+    "avatar": "/assets/avatars/admin.jpg",
+    "games": []
+  }
+]

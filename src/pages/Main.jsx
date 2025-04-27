@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
-import { AppContext } from '../App';  // AppContext'ten verileri alıyoruz
+import React, { useState, useRef, useContext } from 'react';
+import { AppContext } from '../App';
 import './main.css';
 import SideMenu from '../components/SideMenu';
 import Header from './Header';
@@ -13,12 +13,12 @@ import AddUser from './AddUser';
 import RemUser from './RemUser';
 import EnableRating from './EnableRating';
 import DisableRating from './DisableRating';
+import ViewProfile from './ViewProfile';
 
 function Main() {
-  const { library, bag, games, setGames, users, setUsers } = useContext(AppContext); // users ve setUsers'i burada alıyoruz
+  const { library, bag, games, setGames, users, setUsers, currentUser } = useContext(AppContext);
   const [active, setActive] = useState(false);
 
-  // Refs for sections
   const homeRef = useRef();
   const categoriesRef = useRef();
   const libraryRef = useRef();
@@ -29,28 +29,29 @@ function Main() {
   const remURef = useRef();
   const disRnCRef = useRef();
   const enaRnCRef = useRef();
+  const viewProfileRef = useRef();
 
-  // Sections array to manage active sections
   const sections = [
-    { name: 'home', ref: homeRef, active: true },
-    { name: 'categories', ref: categoriesRef, active: false },
-    { name: 'library', ref: libraryRef, active: false },
-    { name: 'bag', ref: bagRef, active: false },
-    { name: 'addG', ref: addGRef, active: false },
-    { name: 'remG', ref: remGRef, active: false },
-    { name: 'addU', ref: addURef, active: false },
-    { name: 'remU', ref: remURef, active: false },
-    { name: 'disRnC', ref: disRnCRef, active: false },
-    { name: 'enaRnC', ref: enaRnCRef, active: false }
+    { name: 'home', ref: homeRef },
+    { name: 'categories', ref: categoriesRef },
+    { name: 'library', ref: libraryRef },
+    { name: 'bag', ref: bagRef },
+    { name: 'addG', ref: addGRef },
+    { name: 'remG', ref: remGRef },
+    { name: 'addU', ref: addURef },
+    { name: 'remU', ref: remURef },
+    { name: 'disRnC', ref: disRnCRef },
+    { name: 'enaRnC', ref: enaRnCRef },
+    { name: 'viewProfile', ref: viewProfileRef }
   ];
 
-  const handelToggleActive = () => {
+  const handleToggleActive = () => {
     setActive(!active);
   };
 
   const handleSectionActive = (target) => {
     sections.forEach(section => {
-      if (section.ref?.current) {
+      if (section.ref.current) {
         if (section.ref.current.id === target) {
           section.ref.current.classList.add('active');
         } else {
@@ -60,22 +61,13 @@ function Main() {
     });
   };
 
-  useEffect(() => {
-    fetch('/api/gamesData.json')
-      .then(res => res.json())
-      .then(data => {
-        setGames(data);
-      })
-      .catch(err => console.error('Fetch error:', err));
-  }, [setGames]); 
-
   return (
     <main>
       <SideMenu active={active} sectionActive={handleSectionActive} />
-      <div className={`banner ${active ? 'active' : undefined}`}>
-        <Header toggleActive={handelToggleActive} />
+      <div className={`banner ${active ? 'active' : ''}`}>
+        <Header toggleActive={handleToggleActive} />
         <div className="container-fluid">
-          {games && games.length > 0 && (
+          {games.length > 0 && (
             <>
               <Home games={games} reference={homeRef} />
               <Categories games={games} reference={categoriesRef} />
@@ -87,6 +79,9 @@ function Main() {
               <RemUser users={users} setUsers={setUsers} reference={remURef} />
               <EnableRating games={games} setGames={setGames} reference={enaRnCRef} />
               <DisableRating games={games} setGames={setGames} reference={disRnCRef} />
+              {currentUser && currentUser.username !== 'admin' && (
+                <ViewProfile games={games} users={users} reference={viewProfileRef} />
+              )}
             </>
           )}
         </div>

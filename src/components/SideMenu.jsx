@@ -18,7 +18,7 @@ function SideMenu({ active, sectionActive }) {
     ? navListData // Admin için tüm menüler
     : navListData.filter(item => 
         item.name === 'Home' || item.name === 'Categories' || 
-        item.name === 'My Library' || item.name === 'My Bag' // 2. Durum
+        item.name === 'My Library' || item.name === 'My Bag'  || item.name ==='View Profile' // 2. Durum
     )
 
   const handleNavOnClick = (id, target) => {

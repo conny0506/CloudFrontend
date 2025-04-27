@@ -67,6 +67,13 @@ const navListData = [
         name: 'Enable Rating and Comments',
         icon: 'bi-check2-circle'
     },
+    {
+        _id: 11,
+        target: 'viewProfile',
+        name: 'View Profile',
+        icon: 'bi-person-circle',
+        active: false
+    },
 ];
 
 export default navListData;

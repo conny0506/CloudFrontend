@@ -13,31 +13,7 @@
     "active": true,
     "developer": "Riot Games",
     "releaseYear": 2009,
-    "genres": [
-      "MOBA",
-      "Fantasy",
-      "Multiplayer"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 240,
-        "rating": 4,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 5,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 3,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["MOBA","Fantasy","Multiplayer"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Cross-platform: Yes"
@@ -56,31 +32,7 @@
     "active": false,
     "developer": "Nintendo Entertainment Analysis & Development",
     "releaseYear": 2017,
-    "genres": [
-      "Racing",
-      "Arcade",
-      "Casual"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 300,
-        "rating": 4,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 5,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 3,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["Racing","Arcade","Casual"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Single-platform"
@@ -99,31 +51,7 @@
     "active": false,
     "developer": "Riot Games",
     "releaseYear": 2009,
-    "genres": [
-      "Action",
-      "Strategy",
-      "Online"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 500,
-        "rating": 2,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 3,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 1,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["Action","Strategy","Online"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Cross-platform: Yes"
@@ -142,31 +70,7 @@
     "active": false,
     "developer": "Riot Games",
     "releaseYear": 2009,
-    "genres": [
-      "Fighting",
-      "Arcade",
-      "PvP"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 500,
-        "rating": 4,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 5,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 3,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["Fighting","Arcade","PvP"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Single-platform"
@@ -185,31 +89,7 @@
     "active": false,
     "developer": "Riot Games",
     "releaseYear": 2009,
-    "genres": [
-      "Action",
-      "Story",
-      "Adventure"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 500,
-        "rating": 5,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 5,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 5,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["Action","Story","Adventure"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Cross-platform: Yes"
@@ -228,31 +108,7 @@
     "active": false,
     "developer": "Riot Games",
     "releaseYear": 2009,
-    "genres": [
-      "Shooter",
-      "Sci-Fi",
-      "FPS"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 500,
-        "rating": 0,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 5,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 1,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["Shooter","Sci-Fi","FPS"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Single-platform"
@@ -271,31 +127,7 @@
     "active": false,
     "developer": "Riot Games",
     "releaseYear": 2009,
-    "genres": [
-      "Battle Royale",
-      "Online",
-      "PvP"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 500,
-        "rating": 1,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 1,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 1,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["Battle Royale","Online","PvP"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Cross-platform: Yes"
@@ -314,31 +146,7 @@
     "active": false,
     "developer": "Riot Games",
     "releaseYear": 2009,
-    "genres": [
-      "RPG",
-      "Dark Fantasy",
-      "Hack'n Slash"
-    ],
-    "users": [
-      {
-        "name": "melih",
-        "playTime": 500,
-        "rating": 4,
-        "comment": "Bağımlılık yapıyor!"
-      },
-      {
-        "name": "ayşe",
-        "playTime": 300,
-        "rating": 5,
-        "comment": "Taktiksel zekaya dayalı, çok iyi."
-      },
-      {
-        "name": "kerem",
-        "playTime": 400,
-        "rating": 3,
-        "comment": "Ortam bazen toxic ama oyun güzel."
-      }
-    ],
+    "genres": ["RPG","Dark Fantasy","Hack'n Slash"],
     "disableRating": false,
     "playTime": 1200,
     "optional2": "Single-platform"

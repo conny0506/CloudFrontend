@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
@@ -15,12 +15,10 @@ function App() {
   const [games, setGames] = useState([]);
   const [users, setUsers] = useState([]);
 
-  // currentUser'ı localStorage'dan başlatıyoruz
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem('currentUser')) || null
   );
 
-  // currentUser'ı ayarlamak için özel bir fonksiyon
   const handleSetCurrentUser = (user) => {
     setCurrentUser(user);
     if (user) {
@@ -30,13 +28,25 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    fetch('/api/gamesData.json')
+      .then(res => res.json())
+      .then(data => setGames(data))
+      .catch(err => console.error('Error fetching games:', err));
+
+    fetch('/api/usersData.json')
+      .then(res => res.json())
+      .then(data => setUsers(data))
+      .catch(err => console.error('Error fetching users:', err));
+  }, []);
+
   return (
-    <AppContext.Provider value={{ 
-      library, setLibrary, 
-      bag, setBag, 
-      currentUser, setCurrentUser: handleSetCurrentUser, 
-      games, setGames, 
-      users, setUsers  
+    <AppContext.Provider value={{
+      library, setLibrary,
+      bag, setBag,
+      currentUser, setCurrentUser: handleSetCurrentUser,
+      games, setGames,
+      users, setUsers
     }}>
       <Router>
         <Routes>
