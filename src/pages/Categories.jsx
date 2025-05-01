@@ -20,13 +20,13 @@ function Categories({games, reference}) {
             setData(games)
             return
         }
-        setData(games.filter(game => game.category === category))
+        setData(games.filter(game => game.genre === category)) 
     }
 
     const [text, setText] = useState('');
 
     const handleSearchGames = e=> {
-        setData(games.filter(game=>game.title.toLowerCase().includes(e.target.value.toLowerCase())))
+        setData(games.filter(game=>game.name?.toLowerCase().includes(e.target.value.toLowerCase())))
         setText(e.target.value)
     }
 
@@ -61,7 +61,7 @@ function Categories({games, reference}) {
             </div>
             <div className="row"> 
                 {data.map(game=>(
-                    <GameCard key = {game._id} game={game} />
+                    <GameCard key={game.id} game={game} />
                 ))}
             </div>
         </div>

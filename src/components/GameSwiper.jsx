@@ -40,7 +40,7 @@ function GameSwiper({ games }) {
       className="gameSwiper"
     >
       {games.map((game) => (
-        <SwiperSlide key={game._id}>
+        <SwiperSlide key={game.id}>
           <GameSlide
             key={game._id}
             game={game}

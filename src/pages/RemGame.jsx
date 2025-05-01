@@ -1,10 +1,16 @@
-import React from 'react'
-import './remGame.css'
+import React from 'react';
+import './remGame.css';
+import { deleteGame } from '../api/gamesApi';
 
-function RemGame({ games, setGames, reference }) {
-  const handleRemoveGame = (gameId) => {
-    const updatedGames = games.filter(game => game._id !== gameId);
-    setGames(updatedGames);
+function RemGame({ games, fetchGames, reference }) {
+  const handleRemoveGame = async (gameId) => {
+    try {
+      await deleteGame(gameId);
+      alert("Game removed successfully.");
+      fetchGames(); // games listesini güncellemek için
+    } catch (err) {
+      alert("Failed to remove game.");
+    }
   };
 
   return (
@@ -15,12 +21,12 @@ function RemGame({ games, setGames, reference }) {
           <p>No games available to remove.</p>
         ) : (
           games.map(game => (
-            <div key={game._id} className="game-item">
+            <div key={game.id || game._id} className="game-item">
               <div className="game-info">
-                <img src={game.img} alt={game.title} className="game-image" />
-                <span>{game.title}</span>
+                <img src={game.img} alt={game.title || game.name} className="game-image" />
+                <span>{game.title || game.name}</span>
               </div>
-              <button className="remove-btn" onClick={() => handleRemoveGame(game._id)}>
+              <button className="remove-btn" onClick={() => handleRemoveGame(game.id || game._id)}>
                 <i className="bi bi-trash"></i> Remove
               </button>
             </div>
@@ -28,7 +34,7 @@ function RemGame({ games, setGames, reference }) {
         )}
       </div>
     </section>
-  )
+  );
 }
 
 export default RemGame;

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import { AppContext } from '../App';
 import './main.css';
 import SideMenu from '../components/SideMenu';
@@ -14,6 +14,7 @@ import RemUser from './RemUser';
 import EnableRating from './EnableRating';
 import DisableRating from './DisableRating';
 import ViewProfile from './ViewProfile';
+import { getAllGames } from '../api/gamesApi';
 
 function Main() {
   const { library, bag, games, setGames, users, setUsers, currentUser } = useContext(AppContext);
@@ -61,6 +62,16 @@ function Main() {
     });
   };
 
+  //  Backend'den oyunları çek
+  const fetchGames = async () => {
+    const data = await getAllGames();
+    setGames(data);
+  };
+
+  useEffect(() => {
+    fetchGames();
+  }, []);
+
   return (
     <main>
       <SideMenu active={active} sectionActive={handleSectionActive} />
@@ -73,8 +84,8 @@ function Main() {
               <Categories games={games} reference={categoriesRef} />
               <MyLibrary games={library} reference={libraryRef} />
               <Bag games={bag} reference={bagRef} />
-              <AddGame games={games} reference={addGRef} addGame={(newGame) => setGames(prev => [...prev, newGame])} />
-              <RemGame games={games} setGames={setGames} reference={remGRef} />
+              <AddGame reference={addGRef} fetchGames={fetchGames} />
+              <RemGame games={games} reference={remGRef} fetchGames={fetchGames} />
               <AddUser users={users} reference={addURef} />
               <RemUser users={users} setUsers={setUsers} reference={remURef} />
               <EnableRating games={games} setGames={setGames} reference={enaRnCRef} />

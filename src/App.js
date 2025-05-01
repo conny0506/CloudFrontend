@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Main from './pages/Main';
 import GameDetail from './pages/GameDetail';
 import Login from './pages/Login';
+import { getAllGames } from './api/gamesApi';
+ // import { getAllUsers } from './api/usersApi'; // backend'den user verisi çekiyorsan aç
 
 export const AppContext = React.createContext();
 
@@ -29,15 +31,20 @@ function App() {
   };
 
   useEffect(() => {
-    fetch('/api/gamesData.json')
-      .then(res => res.json())
-      .then(data => setGames(data))
-      .catch(err => console.error('Error fetching games:', err));
+    const fetchData = async () => {
+      try {
+        const gamesFromApi = await getAllGames();
+        setGames(gamesFromApi);
 
-    fetch('/api/usersData.json')
-      .then(res => res.json())
-      .then(data => setUsers(data))
-      .catch(err => console.error('Error fetching users:', err));
+        // Eğer kullanıcılar da backend'den gelecekse:
+        // const usersFromApi = await getAllUsers();
+        // setUsers(usersFromApi);
+      } catch (err) {
+        console.error('Veri alınamadı:', err);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (

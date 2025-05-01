@@ -11,13 +11,13 @@ function GameSlide({game, active, toggleVideo}) {
           width="1280"
           height="720" 
           src={game.trailer}
-          title={game.title}
+          title={game.name}
           allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
           allowFullScreen 
           ></iframe>
         </div>
         <div className="content">
-          <h2>{game.title}</h2>
+          <h2>{game.name}</h2>
           <p>{game.description}</p>
           <div className="buttons">
             <a href="#" className="orderBtn">Order Now</a>
