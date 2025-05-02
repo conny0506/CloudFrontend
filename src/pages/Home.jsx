@@ -1,7 +1,7 @@
-import React from 'react'
-import './home.css'
-import GameSwiper from '../components/GameSwiper'
-import GameCard from '../components/GameCard'
+import React from 'react';
+import './home.css';
+import GameSwiper from '../components/GameSwiper';
+import GameCard from '../components/GameCard';
 
 function Home({ games, reference }) {
   return (
@@ -12,17 +12,17 @@ function Home({ games, reference }) {
         </div>
         <div className="row">
           <div className="col-lg-6">
-            <h2 className="sectionTitle">Games On Promotion</h2>
+            <h2 className="sectionTitle">Featured Games</h2>
           </div>
         </div>
         <div className="row">
           {games.slice(0, 4).map(game => (
-            <GameCard key={game._id} game={game} />
+            <GameCard key={game.id} game={game} />
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }
 
-export default Home
+export default Home;

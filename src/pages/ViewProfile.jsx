@@ -21,11 +21,20 @@ function ViewProfile({ reference }) {
     );
   }
 
-  const totalPlayTime = userInfo.games.reduce((acc, game) => acc + game.playTime, 0);
-  const averageRating = (userInfo.games.reduce((acc, game) => acc + game.rating, 0) / userInfo.games.length).toFixed(2);
-  const mostPlayed = userInfo.games.reduce((prev, current) => (prev.playTime > current.playTime) ? prev : current, {});
+  const userGames = userInfo.games || [];
 
-  const sortedGames = [...userInfo.games].sort((a, b) => b.playTime - a.playTime);
+  const totalPlayTime = userGames.reduce((acc, game) => acc + (game.playTime || 0), 0);
+  const averageRating =
+    userGames.length > 0
+      ? (userGames.reduce((acc, game) => acc + (game.rating || 0), 0) / userGames.length).toFixed(2)
+      : 'N/A';
+
+  const mostPlayed =
+    userGames.length > 0
+      ? userGames.reduce((prev, current) => (prev.playTime > current.playTime ? prev : current))
+      : null;
+
+  const sortedGames = [...userGames].sort((a, b) => b.playTime - a.playTime);
 
   return (
     <section id="viewProfile" className="viewProfile" ref={reference}>
@@ -37,10 +46,9 @@ function ViewProfile({ reference }) {
           <p><strong>Total Play Time:</strong> {totalPlayTime} hours</p>
           <p><strong>Average Rating:</strong> {averageRating}</p>
           <p><strong>Most Played Game:</strong> {
-            (() => {
-              const relatedGame = games.find(game => game._id === mostPlayed.gameId);
-              return relatedGame ? relatedGame.title : "N/A";
-            })()
+            mostPlayed
+              ? (games.find(g => g.id === mostPlayed.gameId)?.name || "Unknown Game")
+              : "N/A"
           }</p>
         </div>
 
@@ -57,11 +65,11 @@ function ViewProfile({ reference }) {
             </thead>
             <tbody>
               {sortedGames.map((g, index) => {
-                const relatedGame = games.find(game => game._id === g.gameId);
+                const relatedGame = games.find(game => game.id === g.gameId);
                 return (
                   <tr key={index}>
-                    <td>{relatedGame ? relatedGame.title : "Unknown Game"}</td>
-                    <td>{g.playTime}h</td>
+                    <td>{relatedGame ? relatedGame.name : "Unknown Game"}</td>
+                    <td>{g.playTime || 0}h</td>
                     <td>{g.rating}</td>
                     <td>{g.comment}</td>
                   </tr>

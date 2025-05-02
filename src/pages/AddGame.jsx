@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './addGame.css';
+import { AppContext } from '../App';
+import { addGameAPI } from '../api/api';
 
-function AddGame({ games, reference, addGame }) {
+function AddGame({ reference }) {
+  const { games, setGames } = useContext(AppContext);
+
   const [newGame, setNewGame] = useState({
     name: '',
-    genres: '',
-    category: '',
-    photo: '',
-    releaseDate: '',
-    developer: ''
+    genre: '',
+    img: ''
   });
 
   const handleChange = (e) => {
@@ -19,36 +20,28 @@ function AddGame({ games, reference, addGame }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const newGameData = {
-      rating: 0,
-      _id: games.length + 1,
-      title: newGame.name,
-      genres: newGame.genres.split(',').map(genre => genre.trim()),
-      category: newGame.category,
-      img: newGame.photo,
-      releaseYear: new Date(newGame.releaseDate).getFullYear(),
-      developer: newGame.developer,
-      level: "Easy", 
-      rating: 0,
-      discount: 0,
-      price: 0,
-      users: [],
-      playTime: 0
+    const gamePayload = {
+      name: newGame.name,
+      genre: newGame.genre,
+      img: newGame.img,
+      isFeedbackEnabled: true
     };
 
-    addGame(newGameData);
+    try {
+      const addedGame = await addGameAPI(gamePayload);
+      setGames(prev => [...prev, addedGame]);
 
-    setNewGame({
-      name: '',
-      genres: '',
-      category: '',
-      photo: '',
-      releaseDate: '',
-      developer: ''
-    });
+      setNewGame({
+        name: '',
+        genre: '',
+        img: ''
+      });
+    } catch (err) {
+      console.error("Game eklenemedi:", err);
+    }
   };
 
   return (
@@ -58,76 +51,40 @@ function AddGame({ games, reference, addGame }) {
         <form className="add-game-form" onSubmit={handleSubmit}>
           <div className="form-group">
             <label>Game Name</label>
-            <input 
-              type="text" 
-              name="name" 
-              value={newGame.name} 
-              onChange={handleChange} 
-              required 
+            <input
+              type="text"
+              name="name"
+              value={newGame.name}
+              onChange={handleChange}
+              required
             />
           </div>
 
           <div className="form-group">
-            <label>Genres (virgülle ayır)</label>
-            <input 
-              type="text" 
-              name="genres" 
-              value={newGame.genres} 
-              onChange={handleChange} 
-              placeholder="Örn: RPG, Action, Adventure"
-              required 
+            <label>Genre</label>
+            <input
+              type="text"
+              name="genre"
+              value={newGame.genre}
+              onChange={handleChange}
+              placeholder="e.g. MOBA, RPG"
+              required
             />
           </div>
 
           <div className="form-group">
-            <label>Category</label>
-            <input 
-              type="text" 
-              name="category" 
-              value={newGame.category} 
-              onChange={handleChange} 
-              placeholder="Örn: RPG, MOBA"
-              required 
+            <label>Image URL</label>
+            <input
+              type="text"
+              name="img"
+              value={newGame.img}
+              onChange={handleChange}
+              placeholder="https://..."
+              required
             />
           </div>
 
-          <div className="form-group">
-            <label>Photo URL</label>
-            <input 
-              type="text" 
-              name="photo" 
-              value={newGame.photo} 
-              onChange={handleChange} 
-              placeholder="https://..." 
-              required 
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Release Date</label>
-            <input 
-              type="date" 
-              name="releaseDate" 
-              value={newGame.releaseDate} 
-              onChange={handleChange} 
-              required 
-            />
-          </div>
-
-          <div className="form-group">
-            <label>Developer Name</label>
-            <input 
-              type="text" 
-              name="developer" 
-              value={newGame.developer} 
-              onChange={handleChange} 
-              required 
-            />
-          </div>
-
-          <button type="submit" className="submit-button">
-            Add Game
-          </button>
+          <button type="submit" className="submit-button">Add Game</button>
         </form>
       </div>
     </section>

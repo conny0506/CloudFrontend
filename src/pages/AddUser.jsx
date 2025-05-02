@@ -1,9 +1,10 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../App';
 import './addUser.css';
+import { addUser } from '../api/api'; // API'den fonksiyon getiriliyor
 
 function AddUser({ reference }) {
-  const { users, setUsers } = useContext(AppContext);  // setUsers'ı burada context'ten alıyoruz
+  const { users, setUsers } = useContext(AppContext);
   const [newUser, setNewUser] = useState({
     username: '',
     avatar: ''
@@ -19,7 +20,7 @@ function AddUser({ reference }) {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!newUser.username.trim() || !newUser.avatar.trim()) {
@@ -27,20 +28,22 @@ function AddUser({ reference }) {
       return;
     }
 
-    const createdUser = {
-      username: newUser.username,
-      avatar: newUser.avatar
-    };
+    try {
+      const createdUser = await addUser({
+        username: newUser.username,
+        avatar: newUser.avatar
+      });
 
-    setUsers([...users, createdUser]);  // `setUsers`'ı context'ten alıyoruz
-    setNewUser({ username: '', avatar: '' });
+      setUsers([...users, createdUser]);
+      setNewUser({ username: '', avatar: '' });
+      setSuccessMessage("User added successfully!");
 
-    setSuccessMessage("User added successfully!");
-
-    // Başarı mesajını 3 saniye sonra kaldır
-    setTimeout(() => {
-      setSuccessMessage('');
-    }, 3000);
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 3000);
+    } catch (err) {
+      console.error("Kullanıcı eklenemedi:", err);
+    }
   };
 
   return (
@@ -53,6 +56,7 @@ function AddUser({ reference }) {
           placeholder="Username"
           value={newUser.username}
           onChange={handleChange}
+          required
         />
         <input
           type="text"
@@ -60,6 +64,7 @@ function AddUser({ reference }) {
           placeholder="Avatar URL"
           value={newUser.avatar}
           onChange={handleChange}
+          required
         />
         <button type="submit">Add User</button>
 

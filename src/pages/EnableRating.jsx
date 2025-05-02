@@ -1,17 +1,18 @@
 import React from 'react';
 import './enableRating.css';
+import { enableFeedback } from '../api/api'; // API fonksiyonunu eklemeyi unutma
 
 function EnableRating({ games, setGames, reference }) {
 
-  const handleEnable = (gameId) => {
-    // Sadece disable olan oyunları aktif hale getiriyoruz
-    const updatedGames = games.map(game => {
-      if (game._id === gameId && game.disableRating) {  // Yalnızca disableRating: true olanları aktif yapıyoruz
-        return { ...game, disableRating: false };  // disableRating'yi false yaparak aktif hale getiriyoruz
-      }
-      return game;
-    });
-    setGames(updatedGames);  // Güncellenmiş oyunları state'e kaydediyoruz
+  const handleEnable = async (gameId) => {
+    try {
+      const updatedGame = await enableFeedback(gameId); // PATCH /Games/{id}/feedback/enable
+      setGames(prev =>
+        prev.map(g => g.id === updatedGame.id ? updatedGame : g)
+      );
+    } catch (err) {
+      console.error('Feedback enabling failed:', err);
+    }
   };
 
   return (
@@ -22,14 +23,14 @@ function EnableRating({ games, setGames, reference }) {
           <p>No games available to enable rating and comments.</p>
         ) : (
           games
-            .filter(game => game.disableRating) // Yalnızca disable olan oyunları filtreliyoruz
+            .filter(game => game.isFeedbackEnabled === false)
             .map((game) => (
-              <div key={game._id} className="game-item">
+              <div key={game.id} className="game-item">
                 <div className="game-info">
-                  <img src={game.img} alt={game.title} className="game-image" />
-                  <span>{game.title}</span>
+                  <img src={game.img} alt={game.name} className="game-image" />
+                  <span>{game.name}</span>
                 </div>
-                <button className="enable-btn" onClick={() => handleEnable(game._id)}>
+                <button className="enable-btn" onClick={() => handleEnable(game.id)}>
                   <i className="bi bi-check-circle"></i> Enable Rating & Comments
                 </button>
               </div>

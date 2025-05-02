@@ -2,29 +2,24 @@ import React, { useState, useEffect } from 'react';
 import './gameRating.css';
 
 function GameRating({ rating }) {
-  const [stars, setStars] = useState([]);
-
-  const generateStars = () => {
-    const starArray = [];
-    for (let i = 0; i < rating; i++) {
-      starArray.push(i);
-    }
-    return starArray;
-  };
+  const [fullStars, setFullStars] = useState(0);
+  const [emptyStars, setEmptyStars] = useState(0);
 
   useEffect(() => {
-    if (typeof rating !== 'number' || rating < 1 || rating > 5) {
-      setStars([]);
-      return;
-    }
-
-    setStars(generateStars());
+    const validRating = typeof rating === 'number' && rating >= 0 && rating <= 5
+      ? Math.floor(rating)
+      : 0;
+    setFullStars(validRating);
+    setEmptyStars(5 - validRating);
   }, [rating]);
 
   return (
     <div className="gameRating">
-      {stars.map((star, index) => (
-        <i key={index} className="bi bi-star-fill"></i>
+      {[...Array(fullStars)].map((_, i) => (
+        <i key={`full-${i}`} className="bi bi-star-fill"></i>
+      ))}
+      {[...Array(emptyStars)].map((_, i) => (
+        <i key={`empty-${i}`} className="bi bi-star"></i>
       ))}
     </div>
   );

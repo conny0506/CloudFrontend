@@ -1,21 +1,20 @@
-import React, { useState } from 'react'
-import './gameSwiper.css'
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/effect-coverflow'
-import 'swiper/css/navigation'
-import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules'
-import GameSlide from './GameSlide'
-import { AppContext } from '../App'
-import { useContext } from 'react'
+import React, { useState, useContext } from 'react';
+import './gameSwiper.css';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-coverflow';
+import 'swiper/css/navigation';
+import { EffectCoverflow, Navigation, Autoplay } from 'swiper/modules';
+import GameSlide from './GameSlide';
+import { AppContext } from '../App';
 
 function GameSwiper({ games }) {
-  const { currentUser } = useContext(AppContext)
-  const [active, setActive] = useState(false)
+  const { currentUser } = useContext(AppContext);
+  const [active, setActive] = useState(false);
 
   const handleToggleVideo = () => {
-    setActive(!active)
-  }
+    setActive(!active);
+  };
 
   return (
     <Swiper
@@ -40,9 +39,8 @@ function GameSwiper({ games }) {
       className="gameSwiper"
     >
       {games.map((game) => (
-        <SwiperSlide key={game._id}>
+        <SwiperSlide key={game.id}>
           <GameSlide
-            key={game._id}
             game={game}
             active={active}
             toggleVideo={handleToggleVideo}
@@ -62,7 +60,7 @@ function GameSwiper({ games }) {
         </SwiperSlide>
       ))}
     </Swiper>
-  )
+  );
 }
 
-export default GameSwiper
+export default GameSwiper;

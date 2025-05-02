@@ -1,16 +1,17 @@
 import React from 'react';
 import './disableRating.css';
+import { disableFeedback } from '../api/api'; // API fonksiyonu dahil
 
 function DisableRating({ games, setGames, reference }) {
-  
-  const handleDisable = (gameId) => {
-    const updatedGames = games.map(game => {
-      if (game._id === gameId) {
-        return { ...game, disableRating: true };
-      }
-      return game;
-    });
-    setGames(updatedGames);
+  const handleDisable = async (gameId) => {
+    try {
+      const updatedGame = await disableFeedback(gameId);
+      setGames(prev =>
+        prev.map(g => g.id === updatedGame.id ? updatedGame : g)
+      );
+    } catch (err) {
+      console.error('Feedback disabling failed:', err);
+    }
   };
 
   return (
@@ -21,17 +22,17 @@ function DisableRating({ games, setGames, reference }) {
           <p>No games available.</p>
         ) : (
           games.map((game) => (
-            <div key={game._id} className="game-item">
+            <div key={game.id} className="game-item">
               <div className="game-info">
-                <img src={game.img} alt={game.title} />
-                <span>{game.title}</span>
+                <img src={game.img} alt={game.name} />
+                <span>{game.name}</span>
               </div>
-              <button 
-                className="disable-btn" 
-                onClick={() => handleDisable(game._id)}
-                disabled={game.disableRating} // zaten disable edilmişse buton pasif olsun
+              <button
+                className="disable-btn"
+                onClick={() => handleDisable(game.id)}
+                disabled={game.isFeedbackEnabled === false}
               >
-                {game.disableRating ? 'Disabled' : 'Disable'}
+                {game.isFeedbackEnabled === false ? 'Disabled' : 'Disable'}
               </button>
             </div>
           ))

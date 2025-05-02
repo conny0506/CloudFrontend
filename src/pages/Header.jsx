@@ -8,31 +8,33 @@ function Header({ toggleActive }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    setCurrentUser(null); // Kullanıcıyı null yaparak çıkış işlemi yapıyoruz
-    navigate('/'); // Ana sayfaya yönlendiriyoruz
+    setCurrentUser(null);
+    navigate('/');
   };
 
   return (
     <header>
-      <a href="#" className="menu" onClick={toggleActive}>
+      <button className="menu" onClick={toggleActive}>
         <i className="bi bi-sliders"></i>
-      </a>
-      <div className="userItems">
-        <a href="#" className="icon">
-          <i className="bi bi-heart-fill"></i>
-          <span className="like">{library.length}</span>
-        </a>
-        <a href="#" className="icon">
-          <i className="bi bi-bag-fill"></i>
-          <span className="bag">{bag.length}</span>
-        </a>
+      </button>
 
-        {/* Kullanıcı giriş durumuna göre gösterim */}
+      <div className="userItems">
+        {currentUser && (
+          <>
+            <div className="icon">
+              <i className="bi bi-heart-fill"></i>
+              <span className="like">{library.length}</span>
+            </div>
+            <div className="icon">
+              <i className="bi bi-bag-fill"></i>
+              <span className="bag">{bag.length}</span>
+            </div>
+          </>
+        )}
+
         {currentUser ? (
           <div className="avatar">
-            <a href="#">
-              <img src={currentUser.avatar} alt={currentUser.username} />
-            </a>
+            <img src={currentUser.avatar} alt={currentUser.username} />
             <div className="user">
               <span>{currentUser.username}</span>
               <button className="logout-btn" onClick={handleLogout}>

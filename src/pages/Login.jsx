@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../App';
 import './login.css';
@@ -6,31 +6,25 @@ import './login.css';
 function Login() {
   const [username, setUsername] = useState('');
   const [error, setError] = useState('');
-  const [users, setUsers] = useState([]); // Kullanıcıları tutacak state
-  const { setCurrentUser } = useContext(AppContext);
+  const { users, setCurrentUser } = useContext(AppContext);
   const navigate = useNavigate();
 
-  // Kullanıcı verilerini JSON dosyasından almak için useEffect kullanıyoruz
-  useEffect(() => {
-    fetch('/api/usersData.json')
-      .then(response => response.json())
-      .then(data => setUsers(data))
-      .catch(error => console.error('Error loading users:', error));
-  }, []);
-
   const handleLogin = () => {
-    // Kullanıcıyı JSON verisi ile doğrulama
-    const user = users.find(u => u.username === username);
-
+    const user = users.find(u => u.username.toLowerCase() === username.trim().toLowerCase());
+  
     if (user) {
-      // Kullanıcı bulunduysa, kullanıcı bilgisini setCurrentUser ile kaydediyoruz
-      setCurrentUser({ username: user.username, avatar: user.avatar });
-      setError(''); // Hata mesajını temizliyoruz
-      navigate('/'); // Ana sayfaya yönlendirme
+      const userData = { username: user.username, avatar: user.avatar };
+  
+      setCurrentUser(userData);
+      localStorage.setItem('currentUser', JSON.stringify(userData)); // Kalıcı olarak kaydet
+  
+      setError('');
+      navigate('/');
     } else {
-      setError('User not found!'); // Hata mesajını gösteriyoruz
+      setError('User not found!');
     }
   };
+  
 
   return (
     <div className="login-page">
@@ -41,6 +35,7 @@ function Login() {
           placeholder="Enter username..."
           value={username}
           onChange={(e) => setUsername(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && handleLogin()}
         />
         <button onClick={handleLogin}>Login</button>
         {error && <div className="error-message">{error}</div>}

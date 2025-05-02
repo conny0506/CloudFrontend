@@ -1,6 +1,7 @@
 import React, { useState, useRef, useContext } from 'react';
 import { AppContext } from '../App';
 import './main.css';
+
 import SideMenu from '../components/SideMenu';
 import Header from './Header';
 import Home from './Home';
@@ -52,11 +53,7 @@ function Main() {
   const handleSectionActive = (target) => {
     sections.forEach(section => {
       if (section.ref.current) {
-        if (section.ref.current.id === target) {
-          section.ref.current.classList.add('active');
-        } else {
-          section.ref.current.classList.remove('active');
-        }
+        section.ref.current.classList.toggle('active', section.ref.current.id === target);
       }
     });
   };
@@ -67,22 +64,28 @@ function Main() {
       <div className={`banner ${active ? 'active' : ''}`}>
         <Header toggleActive={handleToggleActive} />
         <div className="container-fluid">
+
+          {/* Oyunlarla ilgili bölümler */}
           {games.length > 0 && (
             <>
               <Home games={games} reference={homeRef} />
               <Categories games={games} reference={categoriesRef} />
               <MyLibrary games={library} reference={libraryRef} />
               <Bag games={bag} reference={bagRef} />
-              <AddGame games={games} reference={addGRef} addGame={(newGame) => setGames(prev => [...prev, newGame])} />
               <RemGame games={games} setGames={setGames} reference={remGRef} />
-              <AddUser users={users} reference={addURef} />
-              <RemUser users={users} setUsers={setUsers} reference={remURef} />
               <EnableRating games={games} setGames={setGames} reference={enaRnCRef} />
               <DisableRating games={games} setGames={setGames} reference={disRnCRef} />
-              {currentUser && currentUser.username !== 'admin' && (
-                <ViewProfile games={games} users={users} reference={viewProfileRef} />
-              )}
             </>
+          )}
+
+          {/* Kullanıcı ve oyun yönetim bileşenleri */}
+          <AddGame reference={addGRef} />
+          <AddUser reference={addURef} />
+          <RemUser users={users} setUsers={setUsers} reference={remURef} />
+
+          {/* Profil yalnızca giriş yapan kullanıcılar için */}
+          {currentUser && currentUser.username !== 'admin' && (
+            <ViewProfile games={games} users={users} reference={viewProfileRef} />
           )}
         </div>
       </div>
