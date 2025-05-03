@@ -1,5 +1,8 @@
 .viewProfile {
-    padding: 50px 20px;
+    padding-top: 1px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
     background: var(--bgColor);
     min-height: 100vh;
     display: flex;

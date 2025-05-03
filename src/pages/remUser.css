@@ -9,23 +9,23 @@
   }
   
   .user-list {
-    margin-top: 30px;
-    width: 100%;
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(45%, 1fr));
     gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
   }
   
   .user-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     background: #1f1f1f;
     padding: 15px 20px;
     border-radius: 15px;
-    box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.05),
-                5px 5px 15px rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   }
   
   .user-info {
@@ -35,24 +35,24 @@
   }
   
   .user-avatar {
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     object-fit: cover;
   }
   
   .remove-user-btn {
-    background: var(--second);
-    color: #ffffff;
+    background-color: #00bcd4;
+    color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 10px;
     cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s ease;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
   }
   
   .remove-user-btn:hover {
-    background: var(--primary);
+    background-color: #0097a7;
   }
   

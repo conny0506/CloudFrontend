@@ -66,7 +66,7 @@ function Main() {
         <div className="container-fluid">
 
           {/* Oyunlarla ilgili bölümler */}
-          {games.length > 0 && (
+          {games.length >= 0 && (
             <>
               <Home games={games} reference={homeRef} />
               <Categories games={games} reference={categoriesRef} />

@@ -9,7 +9,7 @@ function SideMenu({ active, sectionActive }) {
 
   const filteredNavData = !currentUser
     ? navListData.filter(item => ['Home', 'Categories'].includes(item.name))
-    : currentUser.username === 'deneme'
+    : currentUser.username === 'admin'
       ? navListData
       : navListData.filter(item =>
           ['Home', 'Categories', 'My Library', 'My Bag', 'View Profile'].includes(item.name)

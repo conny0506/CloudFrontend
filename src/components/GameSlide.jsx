@@ -1,17 +1,18 @@
 import React from 'react';
 import { SwiperSlide } from 'swiper/react';
+import './gameSlide.css';
 
 function GameSlide({ game, active, toggleVideo }) {
   return (
     <SwiperSlide>
       <div className="gameSlider">
         <img src={game.img || '/assets/placeholder.jpg'} alt="Game Image" />
-        
+
         <div className={`video ${active ? 'active' : undefined}`}>
           <iframe
             width="1280"
             height="720"
-            src="https://www.youtube.com/embed/dQw4w9WgXcQ" // <-- geçici sabit video
+            src="https://www.youtube.com/embed/dQw4w9WgXcQ" // sabit video
             title={game.name}
             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
             allowFullScreen
@@ -20,7 +21,18 @@ function GameSlide({ game, active, toggleVideo }) {
 
         <div className="content">
           <h2>{game.name || 'Untitled Game'}</h2>
-          <p>{game.genre ? `Genre: ${game.genre}` : 'No description available.'}</p>
+          <p>
+            {game.genre && <strong>Genre: {game.genre}</strong>}
+          </p>
+
+          {/* ✅ Açıklama eklendi */}
+          <p className="game-description">
+            {game.description
+              ? (game.description.length > 150
+                  ? game.description.slice(0, 150) + '...'
+                  : game.description)
+              : 'No description available.'}
+          </p>
 
           <div className="buttons">
             <a href="#" className="orderBtn">Order Now</a>

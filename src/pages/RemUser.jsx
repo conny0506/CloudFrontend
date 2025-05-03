@@ -1,36 +1,47 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import './remUser.css';
+import { AppContext } from '../App';
 import { deleteUser } from '../api/api';
 
-function RemUser({ users, setUsers, reference }) {
-  const handleRemoveUser = async (username) => {
-    const confirmDelete = window.confirm("Are you sure?");
-    if (!confirmDelete) return;
+function RemUser({ reference }) {
+  const { users, setUsers } = useContext(AppContext);
+
+  const handleRemoveUser = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this user?")) return;
 
     try {
-      const success = await deleteUser(username);
+      const success = await deleteUser(id);
       if (success) {
-        setUsers(prev => prev.filter(user => user.username !== username));
+        setUsers(users.filter(user => user.id !== id));
+      } else {
+        alert("Failed to delete user.");
       }
     } catch (err) {
-      console.error("Kullanıcı silinemedi:", err);
+      console.error("Silme hatası:", err.response?.data || err.message);
+      alert("Kullanıcı silinemedi: " + (err.response?.data || err.message));
     }
   };
+
+  // "admin" kullanıcıyı filtrele
+  const visibleUsers = users.filter(user => user.username !== 'admin');
 
   return (
     <section id="remU" className="remU" ref={reference}>
       <h1>Remove User</h1>
       <div className="user-list">
-        {users.length === 0 ? (
-          <p>No users available to remove.</p>
+        {visibleUsers.length === 0 ? (
+          <p>No users available.</p>
         ) : (
-          users.map((user, index) => (
-            <div key={index} className="user-item">
+          visibleUsers.map(user => (
+            <div key={user.id} className="user-item">
               <div className="user-info">
-                <img src={user.avatar} alt={user.username} className="user-avatar" />
-                <span>{user.username}</span>
+                <img src={user.avatarUrl || '/assets/default-avatar.jpg'} alt={user.username} className="user-avatar" />
+                <div>
+                  <strong>{user.username}</strong><br />
+                  <small>{user.email}</small>
+                </div>
               </div>
-              <button className="remove-user-btn" onClick={() => handleRemoveUser(user.username)}>
+              <button className="remove-user-btn" onClick={() => handleRemoveUser(user.id)}>
                 Remove
               </button>
             </div>

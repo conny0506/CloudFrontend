@@ -11,20 +11,17 @@ function Login() {
 
   const handleLogin = () => {
     const user = users.find(u => u.username.toLowerCase() === username.trim().toLowerCase());
-  
+
     if (user) {
-      const userData = { username: user.username, avatar: user.avatar };
-  
-      setCurrentUser(userData);
-      localStorage.setItem('currentUser', JSON.stringify(userData)); // Kalıcı olarak kaydet
-  
+      setCurrentUser(user);
+      localStorage.setItem('currentUser', JSON.stringify(user)); // Avatar URL ve tüm bilgilerle birlikte kaydet
+
       setError('');
       navigate('/');
     } else {
       setError('User not found!');
     }
   };
-  
 
   return (
     <div className="login-page">

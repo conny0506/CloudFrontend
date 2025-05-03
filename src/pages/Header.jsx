@@ -9,13 +9,14 @@ function Header({ toggleActive }) {
 
   const handleLogout = () => {
     setCurrentUser(null);
+    localStorage.removeItem('currentUser');
     navigate('/');
   };
 
   return (
     <header>
       <button className="menu" onClick={toggleActive}>
-        <i className="bi bi-sliders"></i>
+        <i className="bi bi-slider"></i>
       </button>
 
       <div className="userItems">
@@ -34,7 +35,11 @@ function Header({ toggleActive }) {
 
         {currentUser ? (
           <div className="avatar">
-            <img src={currentUser.avatar} alt={currentUser.username} />
+            <img
+              src={currentUser.avatarUrl || '/assets/default-avatar.jpg'}
+              alt={currentUser.username}
+              className="user-avatar-img"
+            />
             <div className="user">
               <span>{currentUser.username}</span>
               <button className="logout-btn" onClick={handleLogout}>

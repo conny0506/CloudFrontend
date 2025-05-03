@@ -1,48 +1,83 @@
 import React, { useState, useContext } from 'react';
 import { AppContext } from '../App';
 import './addUser.css';
-import { addUser } from '../api/api'; // API'den fonksiyon getiriliyor
+import { addUser } from '../api/api';
 
 function AddUser({ reference }) {
   const { users, setUsers } = useContext(AppContext);
   const [newUser, setNewUser] = useState({
     username: '',
-    avatar: ''
+    email: '',
+    avatarUrl: '',
+    canComment: true,
+    canRate: true
   });
 
   const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setNewUser(prev => ({
       ...prev,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!newUser.username.trim() || !newUser.avatar.trim()) {
-      alert("Please fill in both Username and Avatar URL!");
+    if (!newUser.username.trim() || !newUser.email.trim()) {
+      alert("Please fill in both Username and Email!");
+      return;
+    }
+
+    const usernameTaken = users.some(
+      u => u.username.toLowerCase() === newUser.username.trim().toLowerCase()
+    );
+    const emailTaken = users.some(
+      u => u.email.toLowerCase() === newUser.email.trim().toLowerCase()
+    );
+
+    if (usernameTaken || emailTaken) {
+      setErrorMessage(
+        usernameTaken
+          ? "This username is already taken."
+          : "This email is already registered."
+      );
+      setSuccessMessage('');
       return;
     }
 
     try {
       const createdUser = await addUser({
         username: newUser.username,
-        avatar: newUser.avatar
+        email: newUser.email,
+        avatarUrl: newUser.avatarUrl || "",
+        canComment: newUser.canComment,
+        canRate: newUser.canRate,
+        playedGameIds: [],
+        playedGames: [],
+        ratedGames: []
       });
 
       setUsers([...users, createdUser]);
-      setNewUser({ username: '', avatar: '' });
-      setSuccessMessage("User added successfully!");
+      setNewUser({
+        username: '',
+        email: '',
+        avatarUrl: '',
+        canComment: true,
+        canRate: true
+      });
 
-      setTimeout(() => {
-        setSuccessMessage('');
-      }, 3000);
+      setSuccessMessage("User added successfully!");
+      setErrorMessage('');
+
+      setTimeout(() => setSuccessMessage(''), 3000);
     } catch (err) {
-      console.error("Kullanıcı eklenemedi:", err);
+      console.error("Kullanıcı eklenemedi:", err.message);
+      setErrorMessage(err.message || "Failed to add user.");
+      setSuccessMessage('');
     }
   };
 
@@ -59,18 +94,49 @@ function AddUser({ reference }) {
           required
         />
         <input
-          type="text"
-          name="avatar"
-          placeholder="Avatar URL"
-          value={newUser.avatar}
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={newUser.email}
           onChange={handleChange}
           required
         />
+        <input
+          type="text"
+          name="avatarUrl"
+          placeholder="Avatar URL"
+          value={newUser.avatarUrl}
+          onChange={handleChange}
+        />
+        <label>
+          <input
+            type="checkbox"
+            name="canComment"
+            checked={newUser.canComment}
+            onChange={handleChange}
+          />
+          Can Comment
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="canRate"
+            checked={newUser.canRate}
+            onChange={handleChange}
+          />
+          Can Rate
+        </label>
+
         <button type="submit">Add User</button>
 
         {successMessage && (
           <div className="success-message">
             {successMessage}
+          </div>
+        )}
+        {errorMessage && (
+          <div className="error-message">
+            {errorMessage}
           </div>
         )}
       </form>

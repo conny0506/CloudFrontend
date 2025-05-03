@@ -1,19 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { AppContext } from '../App';
 import './viewProfile.css';
 
 function ViewProfile({ reference }) {
-  const { currentUser, games, users } = useContext(AppContext);
-  const [userInfo, setUserInfo] = useState(null);
+  const { currentUser, games } = useContext(AppContext);
 
-  useEffect(() => {
-    if (currentUser) {
-      const user = users.find(u => u.username === currentUser.username);
-      setUserInfo(user);
-    }
-  }, [currentUser, users]);
-
-  if (!currentUser || !userInfo) {
+  if (!currentUser) {
     return (
       <section id="viewProfile" className="viewProfile" ref={reference}>
         <h1>Unauthorized Access</h1>
@@ -21,35 +13,56 @@ function ViewProfile({ reference }) {
     );
   }
 
-  const userGames = userInfo.games || [];
+  // 🔍 Sadece yorum yaptığı oyunları filtreliyoruz
+  const userGames = games
+    .map(game => {
+      const play = game.playedUsers?.find(u => u.userId === currentUser.id);
+      const comment = game.comments?.find(c => c.userId === currentUser.id);
+      const ratingObj = game.ratings?.find(r => r.userId === currentUser.id);
 
-  const totalPlayTime = userGames.reduce((acc, game) => acc + (game.playTime || 0), 0);
+      // ✅ Yalnızca yorum yapılmış oyunlar dahil edilecek
+      if (play && comment) {
+        return {
+          gameId: game.id,
+          name: game.name,
+          minutes: play.minutes || 0,
+          rating: ratingObj?.rating ?? '—',
+          comment: comment?.content ?? '—'
+        };
+      }
+
+      return null;
+    })
+    .filter(Boolean)
+    .sort((a, b) => b.minutes - a.minutes); // çoktan aza sıralama
+
+  // ⏱ Toplam süre
+  const totalMinutes = userGames.reduce((acc, g) => acc + g.minutes, 0);
+  const totalHours = Math.floor(totalMinutes / 60);
+  const totalMins = totalMinutes % 60;
+
+  // ⭐ Ortalama puan
+  const ratedGames = userGames.filter(g => typeof g.rating === 'number');
   const averageRating =
-    userGames.length > 0
-      ? (userGames.reduce((acc, game) => acc + (game.rating || 0), 0) / userGames.length).toFixed(2)
+    ratedGames.length > 0
+      ? (ratedGames.reduce((acc, g) => acc + g.rating, 0) / ratedGames.length).toFixed(2)
       : 'N/A';
 
-  const mostPlayed =
-    userGames.length > 0
-      ? userGames.reduce((prev, current) => (prev.playTime > current.playTime ? prev : current))
-      : null;
-
-  const sortedGames = [...userGames].sort((a, b) => b.playTime - a.playTime);
+  // 🏆 En çok oynanan oyun
+  const mostPlayed = userGames.length > 0
+    ? userGames.reduce((prev, curr) => (prev.minutes > curr.minutes ? prev : curr))
+    : null;
 
   return (
     <section id="viewProfile" className="viewProfile" ref={reference}>
       <div className="profile-card">
-        <img src={userInfo.avatar} alt="Profile" className="profile-avatar" />
+        <img src={currentUser.avatarUrl || '/assets/default-avatar.jpg'} alt="Profile" className="profile-avatar" />
         <h1>{currentUser.username}</h1>
 
         <div className="profile-info">
-          <p><strong>Total Play Time:</strong> {totalPlayTime} hours</p>
+          <p><strong>Total Play Time:</strong> {totalHours}h {totalMins}min</p>
           <p><strong>Average Rating:</strong> {averageRating}</p>
-          <p><strong>Most Played Game:</strong> {
-            mostPlayed
-              ? (games.find(g => g.id === mostPlayed.gameId)?.name || "Unknown Game")
-              : "N/A"
-          }</p>
+          <p><strong>Most Played Game:</strong> {mostPlayed?.name || "N/A"}</p>
         </div>
 
         <h2>Comments:</h2>
@@ -64,12 +77,14 @@ function ViewProfile({ reference }) {
               </tr>
             </thead>
             <tbody>
-              {sortedGames.map((g, index) => {
-                const relatedGame = games.find(game => game.id === g.gameId);
+              {userGames.map((g, index) => {
+                const gHours = Math.floor(g.minutes / 60);
+                const gMins = g.minutes % 60;
+
                 return (
                   <tr key={index}>
-                    <td>{relatedGame ? relatedGame.name : "Unknown Game"}</td>
-                    <td>{g.playTime || 0}h</td>
+                    <td>{g.name}</td>
+                    <td>{gHours}h {gMins}min</td>
                     <td>{g.rating}</td>
                     <td>{g.comment}</td>
                   </tr>

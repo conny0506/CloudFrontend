@@ -9,7 +9,8 @@ function AddGame({ reference }) {
   const [newGame, setNewGame] = useState({
     name: '',
     genre: '',
-    img: ''
+    img: '',
+    description: '' // 👈 yeni alan
   });
 
   const handleChange = (e) => {
@@ -27,6 +28,7 @@ function AddGame({ reference }) {
       name: newGame.name,
       genre: newGame.genre,
       img: newGame.img,
+      description: newGame.description, // 👈 eklendi
       isFeedbackEnabled: true
     };
 
@@ -37,7 +39,8 @@ function AddGame({ reference }) {
       setNewGame({
         name: '',
         genre: '',
-        img: ''
+        img: '',
+        description: ''
       });
     } catch (err) {
       console.error("Game eklenemedi:", err);
@@ -80,6 +83,18 @@ function AddGame({ reference }) {
               value={newGame.img}
               onChange={handleChange}
               placeholder="https://..."
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>Description</label>
+            <textarea
+              name="description"
+              value={newGame.description}
+              onChange={handleChange}
+              placeholder="Enter game description..."
+              rows={3}
               required
             />
           </div>

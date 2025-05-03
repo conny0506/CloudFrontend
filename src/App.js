@@ -19,26 +19,30 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
 
   useEffect(() => {
-    // Sayfa yenilendiğinde currentUser'ı localStorage'dan geri yükle
     const storedUser = localStorage.getItem('currentUser');
-    if (storedUser) {
-      setCurrentUser(JSON.parse(storedUser));
-    }
-
-    // Diğer verileri yükle
+  
     const loadData = async () => {
       try {
         const gamesData = await fetchGames();
         const usersData = await fetchUsers();
         setGames(gamesData);
         setUsers(usersData);
+  
+        if (storedUser) {
+          const parsedUser = JSON.parse(storedUser);
+          const fullUser = usersData.find(u => u.username === parsedUser.username);
+          if (fullUser) {
+            setCurrentUser(fullUser);
+          }
+        }
       } catch (error) {
         console.error('Veriler alınamadı:', error);
       }
     };
-
+  
     loadData();
   }, []);
+  
 
   return (
     <AppContext.Provider

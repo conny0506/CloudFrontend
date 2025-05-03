@@ -1,38 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './disableRating.css';
-import { disableFeedback } from '../api/api'; // API fonksiyonu dahil
+import { disableFeedback, fetchGames } from '../api/api';
 
 function DisableRating({ games, setGames, reference }) {
-  const handleDisable = async (gameId) => {
+  const [message, setMessage] = useState('');
+
+  const handleDisable = async (game) => {
     try {
-      const updatedGame = await disableFeedback(gameId);
-      setGames(prev =>
-        prev.map(g => g.id === updatedGame.id ? updatedGame : g)
-      );
+      await disableFeedback(game.id);
+
+      const updatedGames = await fetchGames();
+      setGames(updatedGames);
+
+      setMessage(`"${game.name}" feedback disabled successfully!`);
+      setTimeout(() => setMessage(''), 3000);
     } catch (err) {
-      console.error('Feedback disabling failed:', err);
+      console.error('Disable işlemi başarısız:', err.response?.data || err.message);
+      alert("Feedback devre dışı bırakılamadı.");
     }
   };
+
+  const enabledGames = games.filter(game => game.isFeedbackEnabled === true);
 
   return (
     <section id="disRnC" className="disRnC" ref={reference}>
       <h1>Disable Rating and Comments</h1>
+
+      {message && <div className="success-message">{message}</div>}
+
       <div className="game-list">
-        {games.length === 0 ? (
-          <p>No games available.</p>
+        {enabledGames.length === 0 ? (
+          <p>All games already have feedback disabled.</p>
         ) : (
-          games.map((game) => (
+          enabledGames.map((game) => (
             <div key={game.id} className="game-item">
               <div className="game-info">
                 <img src={game.img} alt={game.name} />
                 <span>{game.name}</span>
               </div>
-              <button
-                className="disable-btn"
-                onClick={() => handleDisable(game.id)}
-                disabled={game.isFeedbackEnabled === false}
-              >
-                {game.isFeedbackEnabled === false ? 'Disabled' : 'Disable'}
+              <button className="disable-btn" onClick={() => handleDisable(game)}>
+                Disable
               </button>
             </div>
           ))

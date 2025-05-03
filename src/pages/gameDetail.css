@@ -13,7 +13,7 @@
   background: #1f1f1f;
   padding: 30px;
   border-radius: 20px;
-  max-width: 800px;
+  max-width: 900px;
   width: 100%;
   box-shadow: -5px -5px 15px rgba(255, 255, 255, 0.1),
               5px 5px 15px rgba(0, 0, 0, 0.35);
@@ -30,6 +30,8 @@
 
 .game-info {
   color: #ffffff;
+  display: flex;
+  flex-direction: column;
 }
 
 .game-info h1 {
@@ -204,4 +206,39 @@
 
 .add-comment-form button:hover {
   background: var(--primary);
+}
+
+
+.game-description {
+  font-size: 1.15rem;
+  color: #e0e0e0;
+  line-height: 1.7;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  max-width: 100%;
+  white-space: pre-wrap;
+  text-align: justify;
+}
+
+
+/* Oynama süresi kutuları */
+.playtime-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 15px;
+  font-size: 1.1rem;
+}
+
+.playtime-stats p {
+  background: #2c2c2c;
+  padding: 10px 15px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.4);
+  color: #ddd;
+  font-weight: 500;
+}
+
+.playtime-stats p strong {
+  color: var(--primary);
 }

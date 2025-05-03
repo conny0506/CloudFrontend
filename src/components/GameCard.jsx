@@ -42,7 +42,15 @@ function GameCard({ game }) {
           <span className="gameType">{game.genre || 'Unknown'}</span>
           <GameRating rating={game.averageRating || 0} />
         </div>
-        <div className="gameTitle mt-4 mb-3">{game.name || 'Untitled Game'}</div>
+        <div className="gameTitle mt-4 mb-2">{game.name || 'Untitled Game'}</div>
+
+        {/* ✅ Yeni: Açıklama */}
+        <div className="gameDescription  small mb-2">
+          {game.description?.length > 100
+            ? `${game.description.slice(0, 100)}...`
+            : game.description || 'No description.'}
+        </div>
+
         <div className="gamePrice">
           <span className="currentPrice">
             {game.totalPlayTime > 0 ? `${game.totalPlayTime}h played` : 'Just Released'}
