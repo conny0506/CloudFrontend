@@ -1,0 +1,43 @@
+trigger:
+- main
+
+pool:
+  vmImage: windows-latest
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '20.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+  displayName: 'npm install'
+
+- script: |
+    npm run build
+  displayName: 'npm build'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: 'build'   # Build klasörünü alır
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/build.zip'
+    replaceExistingArchive: true
+  displayName: 'Archive build output'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtopublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'Publish Artifact: drop'
+
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'ayaj-test-api'  # Azure Service Connection adını yaz
+    appType: 'webApp'
+    appName: 'ayajtestfrontend'                        # Azure'da oluşturduğun Web App adı
+    package: '$(Build.ArtifactStagingDirectory)/build.zip'
+  displayName: 'Deploy to Azure Web App'
